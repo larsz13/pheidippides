@@ -1,0 +1,52 @@
+/* ----------- FONT ------------ */
+
+@font-face {
+    font-family:'Favorit';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Favorit'), url('fonts/favorit-regular.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family:'Favorit';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Favorit'), url('fonts/favorit-medium.otf') format('opentype');
+  }
+
+body{
+    background-color:black;
+}
+
+form{
+    width:400px;
+}
+
+h3{
+    font-family: 'Favorit';
+    font-weight:400;
+    color:white;
+    font-size:18px;
+    margin-top:24px;
+    margin-bottom:4px;
+}
+
+input,textarea{
+    font-family: 'Favorit';
+    font-size:28px;
+    padding:20px;
+    width:100%;
+    border-radius: 20px;
+    background-color:black;
+    border:2px solid white;
+    color:white;
+}
+
+input[type=submit]{
+    margin-top:20px;
+    height:60px;
+    width:100%;
+    font-family: 'Favorit';
+    background-color:white;
+    color:black;
+}
