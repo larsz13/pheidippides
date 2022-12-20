@@ -18,3 +18,5 @@ const job = new CronJob("* * * * *", () => {
 //DE-COMMENT THE FOLLOWING LINE TO GO LIVE ON TWITTER ACCOUNT:
 
 //job.start();
+
+//or simply use tweet();
