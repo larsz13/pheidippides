@@ -19,4 +19,4 @@ const job = new CronJob("* * * * *", () => {
 
 //job.start();
 
-//or simply use tweet();
+tweet();

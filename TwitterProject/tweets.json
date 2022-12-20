@@ -1,0 +1,14 @@
+[
+  {
+    "text": "This is tweet 7!",
+    "scheduled_at": "2022-12-20T17:40:00.000Z"
+  },
+  {
+    "text": "This is tweet 8!",
+    "scheduled_at": "2022-12-21T17:40:00.000Z"
+  },
+  {
+    "text": "This is tweet 9!",
+    "scheduled_at": "2022-12-22T17:40:00.000Z"
+  }
+]
