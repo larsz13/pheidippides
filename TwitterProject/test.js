@@ -1,2 +1,2 @@
-const gen = require('./TwitterProject/prompt');
+const gen = require('./prompt');
 gen();
