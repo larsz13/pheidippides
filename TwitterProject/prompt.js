@@ -4,7 +4,7 @@ const fs = require("fs").promises;
  
 // DEFINE OPENAI API-KEY !Save in nodemon.js please!
 const configuration = new Configuration({
-    apiKey: "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"
+    apiKey: process.env.OPENAI_SECRET_KEY
 });
 const openaiInput = new OpenAIApi(configuration);
 const openaiJourney = new OpenAIApi(configuration);
