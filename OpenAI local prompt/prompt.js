@@ -4,7 +4,7 @@ const fs = require("fs").promises;
 
 // DEFINE OPENAI API-KEY !Save in nodemon.js please!
 const configuration = new Configuration({
-    apiKey: "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"
+    apiKey: ""
 });
 const openaiInput = new OpenAIApi(configuration);
 const openaiJourney = new OpenAIApi(configuration);
@@ -101,8 +101,6 @@ async function generateTweetList(){
     let outputAiResponse = outputResponse.data.choices[0].text;
     let outputTweet = outputAiResponse.split(":")[1].trim();
     responseList.push(outputTweet);
-
-    //const noQuotes = responseList.map(item => JSON.parse(item))
 
     // WRITES RESPONSES IN A LIST IN FILE TWEETLIST.JSON & STRINGIFIES THE RESPONSES
     await fs.writeFile("./tweetList.json", JSON.stringify(responseList, null, "\t"));
