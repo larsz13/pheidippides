@@ -2,6 +2,7 @@
   "dependencies": {
     "twit": "^2.2.11",
     "twitter": "^1.7.1",
-    "twitter-ads": "^0.2.1"
+    "twitter-ads": "^0.2.1",
+    "twitter-api-v2": "^1.12.10"
   }
 }

@@ -1,53 +1,39 @@
 const client = require('./twitterClient.js');
-const clientv1 = require('./twitterClientV1.js');
-const clientAds = require('./twitterClientAds.js');
 
-// Load the list of tweets to be scheduled from a JSON file
-const tweets = require('./tweets.json');
+// REQUIRE FS MODULE
+const fs = require('fs');  
 
-// Iterate over the list of tweets and schedule each one
-tweets.forEach((tweet) => {
-  const { text, scheduled_at } = tweet;
+let arrayList = [];
+let i = 0;
 
-  const as_user_id = 1600412941244932000;
+function sendTweet() {
+  if (i >= arrayList.length) {
+    console.log("BREAK")
+    return;
+  }
 
-  // Use the 'POST /v2/tweets' endpoint to schedule the tweet
+  console.log(`send Tweet ${arrayList[i]}`);
 
-  clientAds.post('accounts/18ce55jnna9/scheduled_tweets', { text, scheduled_at, as_user_id }, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(`Tweet scheduled: ${text}`);
-    }
-  });
-  
-  /*client.post('accounts/18ce55jnna9/scheduled_tweets', { text, scheduled_at, as_user_id }, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(`Tweet scheduled: ${text}`);
-    }
-  });
-  client.post('tweets', { text }, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(`Tweet scheduled: ${text}`);
-    }
-  });*/
-  //client.v2.tweet(text);
-
-/*
-  client.post("statuses/scheduled_tweets", {status: text, scheduled_at}, function(error, tweet, response) {
-    console.log(error);
+  client.v2.tweet({ text: arrayList[i] }).then((data) => {
+    i += 1;
+    console.log("TWEETED")
+    setTimeout(() => {
+      sendTweet();
+    }, 3000 );
+  }).catch(error => {
+    console.error(error);
   })
-  */
+}
 
- /*
-  clientv1.get("users/show", {
-    screen_name: "PheidippidesBot"
-  }, function(error, tweet, response) {
-    console.log(JSON.parse(response.body, null, "\t"));
-  })
-*/
+// READ FILE TWEETLIST.JSON
+fs.readFile('./TwitterProject/tweetList.json', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  // PARSE THE DATA AS A JSON ARRAY
+  arrayList = JSON.parse(data);
+
+  sendTweet();
 });
