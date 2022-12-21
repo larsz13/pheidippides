@@ -1,72 +1,39 @@
 const client = require('./twitterClient.js');
-const tweets = require('./tweets.json');
 
-/*
-tweets.forEach((tweet) => {
-  const { text} = tweet;
+// REQUIRE FS MODULE
+const fs = require('fs');  
 
-  setTimeout(() => {
-    client.v2.tweet({text}, (error, data) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log(`Tweet scheduled to be sent in 30 seconds: ${text}`);
-      }
-  });
-  }, 30000);
-});
-*/
+let arrayList = [];
+let i = 0;
 
-tweets.forEach((tweet) => {
-  const { text} = tweet;
-
-  setTimeout(tweeting, 30000, text)
-  
-  //tweeting function
-  function tweeting(text){
-    client.v2.tweet({text}, (error, data) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log(`Tweeted with timeout of ${timeOutTime}: ${text}`);
-      }
-    });
+function sendTweet() {
+  if (i >= arrayList.length) {
+    console.log("BREAK")
+    return;
   }
-});
 
-  /*
-  setTimeout(() => {
-    client.post('v2/tweets', { text }, (error, data) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log(`Tweet scheduled to be sent in 30 seconds: ${text}`);
-      }
-  });
-}, 30000);
-});
-*/
+  console.log(`send Tweet ${arrayList[i]}`);
 
-/*
-// Iterate over the list of tweets and post each one with timeout
-tweets.forEach((tweet) => {
+  client.v2.tweet({ text: arrayList[i] }).then((data) => {
+    i += 1;
+    console.log("TWEETED")
+    setTimeout(() => {
+      sendTweet();
+    }, 3000 );
+  }).catch(error => {
+    console.error(error);
+  })
+}
 
-  const { text, mood } = tweet;
-  //const as_user_id = 1600412941244932000;
-
-  //posting tweet after timeout
-  setTimeout(tweeting, 30000, text, mood)
-  
-  //tweeting function
-  function tweeting(text, mood ){
-    client.post('/2/tweets', { text, mood }, (error, data) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log(`Tweeted with timeout of ${timeOutTime}: ${text}`);
-      }
-    });
+// READ FILE TWEETLIST.JSON
+fs.readFile('./OpenAI local prompt/tweetList.json', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
   }
-});
-*/
 
+  // PARSE THE DATA AS A JSON ARRAY
+  arrayList = JSON.parse(data);
+
+  sendTweet();
+});
