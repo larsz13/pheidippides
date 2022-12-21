@@ -8,22 +8,30 @@
   <title>Pheidippides</title>
 </head>
 <body>
-<form id="message-form">
-    <p id="speech">Hey! I am Pheidippides and would love to deliver your message. </p>
-    <img src="img/pheidi.jpg" alt="Girl in a jacket" width="500" height="600" />
-    <label for="msg">Your message</label>
-        <textarea name="msg" rows="8" maxlength="250"></textarea>
-    <label for="send-id">Twitter account of sender</label>
-        <input type="text" name="send-id" value="" maxlength="15">
-    <label for="send-loc">Location of sender</label>
-        <input type="text" name="send-loc" value="" maxlength="15">
-    <label for="rec-id">Twitter account of receiver</label>
-        <input type="text" name="rec-id" value="" maxlength="15">
-    <label for="rec-loc">Location of receiver</label>
-        <input type="text" name="rec-loc" value="" maxlength="15">
-    <br />
-    <input type="submit">
-</form>
+<div id="message-form">
+    <div id="intro">
+        <p id="speech">Hey! I am Pheidippides and would love to deliver your message.</p>
+        <div class="arrow-down"></div>
+        <img src="img/pheidi.jpg" alt="Image of Pheidippides" width="180" height="180">
+    </div>
+    <div id="labels">
+        <label for="msg">Your message</label>
+            <textarea name="msg" rows="8" maxlength="250" id="msg"></textarea>
+        <label for="send-id">Twitter account of sender</label>
+            <input type="text" name="send-id" value="" maxlength="15" id="send">
+        <label for="send-loc">Location of sender</label>
+            <input type="text" name="send-loc" value="" maxlength="15" id="locA">
+        <label for="rec-id">Twitter account of receiver</label>
+            <input type="text" name="rec-id" value="" maxlength="15" id="rec">
+        <label for="rec-loc">Location of receiver</label>
+            <input type="text" name="rec-loc" value="" maxlength="15" id="locB">
+        <br />
+    </div>
+    <!--<input id="button" type="submit">-->
+    <button data-js="button" id="button">
+        submit
+    </button>
+</div>
 <script src="sketch.js"></script>
 </body>
 </html>
