@@ -1,4 +1,4 @@
-
+/* ----- SERVER SENDING TRY
 // Get the form data
 const form = document.querySelector('form');
 const formData = new FormData(form);
@@ -21,3 +21,5 @@ fetch('/api/endpoint', {
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error(error));
+*/
+
