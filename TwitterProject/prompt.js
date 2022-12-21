@@ -4,7 +4,7 @@ const fs = require("fs").promises;
 
 // DEFINE OPENAI API-KEY !Save in nodemon.js please!
 const configuration = new Configuration({
-    apiKey: ""
+    apiKey: "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"
 });
 const openaiInput = new OpenAIApi(configuration);
 const openaiJourney = new OpenAIApi(configuration);
@@ -106,7 +106,7 @@ async function generateTweetList(){
     await fs.writeFile("./tweetList.json", JSON.stringify(responseList, null, "\t"));
 
     // READS ARRAY LIST IN THE FILE TWEETS.JSON WITH INDICES - For Janosch
-    let arr = JSON.parse(await fs.readFile("./tweetList.json"));
+    let arr = JSON.parse(await fs.readFile("./TwitterProject/tweetList.json"));
     //console.log(arr);
 }
 
