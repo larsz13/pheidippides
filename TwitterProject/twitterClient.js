@@ -2,14 +2,13 @@ const { TwitterApi } = require("twitter-api-v2");
 
 const client = new TwitterApi({
     
-    appKey: "GzZtModn4ABIi1k7xtrwb2ZbH",
-    appSecret: "1lnLkXPSF2VhfzXHaCTZWhm5QcDlFSFDurahb4N0t9w7oqZbEl",
-    accessToken: "1600412941244932101-XyIfrvrlFkvyu1mslZc71U0J0z1fHs",
-    accessSecret: "HdUzUEKMJDnQ5v8zRzQ12nTaAwdIbtiIO6LyJEKlovSCM"
+    appKey: "ZpbzXX96hDmuQkPGAuQMtAlSb",
+    appSecret: "oraS8fWicoNOs54ol6yXtHA1Fj9Jnd3ozhBUoVnL7HlghQ1CYS",
+    accessToken: "1600412941244932101-UAwmDWFbOjaHJ3PF8eWo28FNa1gEe7",
+    accessSecret: "xLi0LSrUthjAaSKwK8UTCnatSujvX9BY23KgkAmG710Lz"
 
 })
 
-const rwClient = client.readWrite
+const rwClient = client.readWrite;
 
-module.exports = rwClient
-//module.exports = client;
+module.exports = rwClient;

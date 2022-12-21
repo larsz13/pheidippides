@@ -1,53 +1,72 @@
 const client = require('./twitterClient.js');
-const clientv1 = require('./twitterClientV1.js');
-const clientAds = require('./twitterClientAds.js');
-
-// Load the list of tweets to be scheduled from a JSON file
 const tweets = require('./tweets.json');
 
-// Iterate over the list of tweets and schedule each one
+/*
 tweets.forEach((tweet) => {
-  const { text, scheduled_at } = tweet;
+  const { text} = tweet;
 
-  const as_user_id = 1600412941244932000;
-
-  // Use the 'POST /v2/tweets' endpoint to schedule the tweet
-
-  clientAds.post('accounts/18ce55jnna9/scheduled_tweets', { text, scheduled_at, as_user_id }, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(`Tweet scheduled: ${text}`);
-    }
+  setTimeout(() => {
+    client.v2.tweet({text}, (error, data) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(`Tweet scheduled to be sent in 30 seconds: ${text}`);
+      }
   });
+  }, 30000);
+});
+*/
+
+tweets.forEach((tweet) => {
+  const { text} = tweet;
+
+  setTimeout(tweeting, 30000, text)
   
-  /*client.post('accounts/18ce55jnna9/scheduled_tweets', { text, scheduled_at, as_user_id }, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(`Tweet scheduled: ${text}`);
-    }
+  //tweeting function
+  function tweeting(text){
+    client.v2.tweet({text}, (error, data) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(`Tweeted with timeout of ${timeOutTime}: ${text}`);
+      }
+    });
+  }
+});
+
+  /*
+  setTimeout(() => {
+    client.post('v2/tweets', { text }, (error, data) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(`Tweet scheduled to be sent in 30 seconds: ${text}`);
+      }
   });
-  client.post('tweets', { text }, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(`Tweet scheduled: ${text}`);
-    }
-  });*/
-  //client.v2.tweet(text);
+}, 30000);
+});
+*/
 
 /*
-  client.post("statuses/scheduled_tweets", {status: text, scheduled_at}, function(error, tweet, response) {
-    console.log(error);
-  })
-  */
+// Iterate over the list of tweets and post each one with timeout
+tweets.forEach((tweet) => {
 
- /*
-  clientv1.get("users/show", {
-    screen_name: "PheidippidesBot"
-  }, function(error, tweet, response) {
-    console.log(JSON.parse(response.body, null, "\t"));
-  })
-*/
+  const { text, mood } = tweet;
+  //const as_user_id = 1600412941244932000;
+
+  //posting tweet after timeout
+  setTimeout(tweeting, 30000, text, mood)
+  
+  //tweeting function
+  function tweeting(text, mood ){
+    client.post('/2/tweets', { text, mood }, (error, data) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(`Tweeted with timeout of ${timeOutTime}: ${text}`);
+      }
+    });
+  }
 });
+*/
+
