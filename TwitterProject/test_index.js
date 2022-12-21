@@ -26,7 +26,7 @@ function sendTweet() {
 }
 
 // READ FILE TWEETLIST.JSON
-fs.readFile('./OpenAI local prompt/tweetList.json', 'utf8', (err, data) => {
+fs.readFile('./TwitterProject/tweetList.json', 'utf8', (err, data) => {
   if (err) {
     console.error(err);
     return;
