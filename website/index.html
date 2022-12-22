@@ -9,12 +9,12 @@
 </head>
 <body>
 <div id="message-form">
-    <div id="intro">
-        <p id="speech">Hey! I am Pheidippides and would love to deliver your message.</p>
+    <div id="intro" class="fade-in">
+        <p id="speech"></p>
         <div class="arrow-down"></div>
         <img src="img/pheidi.jpg" alt="Image of Pheidippides" width="180" height="180">
     </div>
-    <div id="labels">
+    <div id="labels" class="fade-in">
         <label for="msg">Your message</label>
             <textarea name="msg" rows="8" maxlength="250" id="msg"></textarea>
         <label for="send-id">Twitter account of sender</label>
@@ -28,7 +28,7 @@
         <br />
     </div>
     <!--<input id="button" type="submit">-->
-    <button data-js="button" id="button">
+    <button data-js="button" id="button" class="fade-in">
         submit
     </button>
 </div>

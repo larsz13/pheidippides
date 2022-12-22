@@ -102,3 +102,42 @@ input[type=submit],button{
 .hide{
   display:none;
 }
+
+#button{
+  transition: 0.3s ease;
+  border:2px solid white;
+  background-color:black;
+  color:white;
+}
+
+#button:hover{
+  cursor: pointer;
+  color:black;
+  background-color:white;
+  transform: scale(1.03);
+  transition: 0.4s ease;
+
+}
+
+
+/* --------- ANIMATION ---------- */
+
+
+#intro{
+  animation: fadeIn 3s;
+}
+
+#labels, #button { 
+  animation: fadeInDelay 3s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeInDelay {
+  0% { opacity: 0; }
+  66% { opacity: 0; }
+  100% { opacity: 1; }
+}

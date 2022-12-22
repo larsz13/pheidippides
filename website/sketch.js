@@ -31,17 +31,13 @@ const button = document.querySelector('[data-js="button"]');
 const labels = document.querySelector('#labels');
 const speech = document.querySelector('#speech');
 
+var i = 0;
+var sptext = 'Hey! I am Pheidippides and would love to deliver your message.';
+var speed = 30;
+
 button.addEventListener('click',changeMode);
-initialize();
+typeWriter();
 
-
-function initialize(){
-  if(mode==1){
-    speech.innerHTML = "I got your message! I will deliver “Joy to you, we won!” to @receiver. The journey to Basel will take me about 12h. Looking forward to it!";
-  }else{
-    speech.innerHTML = "Hey! I am Pheidippides and would love to deliver your message.";
-  }
-}
 
 function changeMode(){
   msg = document.getElementById("msg").value;
@@ -52,12 +48,27 @@ function changeMode(){
   if(mode==0){
     console.log("changed to 1");
     labels.classList.toggle("hide");
-    speech.innerHTML = "I got your message, @"+send+"! I will deliver “"+msg+"” to @"+rec+". My journey will take me from "+locA+" to "+locB+". Looking forward to it!";
+    sptext = "I got your message, @"+send+"! I will deliver “"+msg+"” to @"+rec+". My journey will take me from "+locA+" to "+locB+". Looking forward to it!";
+    i = 0;
+    document.getElementById("speech").innerHTML = "";
+    typeWriter();
+    //speech.innerHTML = "I got your message, @"+send+"! I will deliver “"+msg+"” to @"+rec+". My journey will take me from "+locA+" to "+locB+". Looking forward to it!";
+    button.innerHTML = "new message";
     mode = 1;
   }else if(mode==1){
     console.log("changed to 0");
     labels.classList.toggle("hide");
     speech.innerHTML = "Hey! I am Pheidippides and would love to deliver your message.";
     mode = 0;
+    location.reload();
+  }
+}
+
+
+function typeWriter() {
+  if (i < sptext.length) {
+    document.getElementById("speech").innerHTML += sptext.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
   }
 }
