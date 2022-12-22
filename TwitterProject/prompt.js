@@ -1,10 +1,10 @@
 // REQUIRE OPENAI
 const { Configuration, OpenAIApi } = require("openai");
 const fs = require("fs").promises;
-
+ 
 // DEFINE OPENAI API-KEY !Save in nodemon.js please!
 const configuration = new Configuration({
-    apiKey: ""
+    apiKey: ""//process.env.OPENAI_SECRET_KEY
 });
 const openaiInput = new OpenAIApi(configuration);
 const openaiJourney = new OpenAIApi(configuration);
@@ -34,7 +34,11 @@ let pointA = "Basel";
 let pointB = "Zurich";
 
 // INPUT MESSAGE
-let message = "I am a machine";
+let message = "I am a machine.";
+
+// INPUT SENDER & RECEIVER
+let sender = "@PheidippidesBot";
+let receiver = "@ZulyInspires";
 
 // OPENAI INITIAL CONVO PROMPT
 const chatLog = `The following is a conversation with an AI assistant.\nThe assistant is a messenger and is called Pheidippides.\nMessenger\'s trait: ${randomTraitA} and ${randomTraitB}\nMessenger\'s mood: ${randomPosMood} and ${randomNegMood} \n`;
@@ -99,15 +103,16 @@ async function generateTweetList(){
         temperature: 0.9
     })
     let outputAiResponse = outputResponse.data.choices[0].text;
-    let outputTweet = outputAiResponse.split(":")[1].trim();
+    let outputQuote = outputAiResponse.split(":")[1].trim();
+    let outputTweet = `Message from ${sender} to ${receiver}: "${message}" ` + outputQuote; 
     responseList.push(outputTweet);
 
     // WRITES RESPONSES IN A LIST IN FILE TWEETLIST.JSON & STRINGIFIES THE RESPONSES
-    await fs.writeFile("./tweetList.json", JSON.stringify(responseList, null, "\t"));
+    await fs.writeFile("./TwitterProject/tweetList.json", JSON.stringify(responseList, null, "\t"));
 
-    // READS ARRAY LIST IN THE FILE TWEETS.JSON WITH INDICES - For Janosch
-    let arr = JSON.parse(await fs.readFile("./tweetList.json"));
-    //console.log(arr);
+    // READS ARRAY LIST IN THE FILE TWEETLIST.JSON WITH INDICES - For Janosch
+    let arr = JSON.parse(await fs.readFile("./TwitterProject/tweetList.json"));
+    console.log(arr);
 }
 
 // GENERATES TWEET LIST BASED ON FUNCTION generateTweetLists
