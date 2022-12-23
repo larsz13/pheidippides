@@ -1,3 +1,6 @@
+
+// INPUT THE MESSAGE AND PROMPTS INTO THIS FILE. -- STEP ONE.
+
 // REQUIRE OPENAI
 const { Configuration, OpenAIApi } = require("openai");
 const fs = require("fs").promises;

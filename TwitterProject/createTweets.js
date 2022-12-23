@@ -1,11 +1,16 @@
-const client = require('./twitterClient.js');
 
-// REQUIRE FS MODULE
+// THIS FILE CREATES THE TWEETS. -- STEP THREE.
+
+//Require client
+const client = require('./twitterClient.js');
 const fs = require('fs');  
 
+// Create empty Array List for Tweets
 let arrayList = [];
 let i = 0;
 
+
+// Create Tweet and Timeout before tweeting the next one.
 function sendTweet() {
   if (i >= arrayList.length) {
     console.log("BREAK")
@@ -25,14 +30,14 @@ function sendTweet() {
   })
 }
 
-// READ FILE TWEETLIST.JSON
+// read file TWEETLIST.JSON
 fs.readFile('./TwitterProject/tweetList.json', 'utf8', (err, data) => {
   if (err) {
     console.error(err);
     return;
   }
 
-  // PARSE THE DATA AS A JSON ARRAY
+  // parse the data as a jason array
   arrayList = JSON.parse(data);
 
   sendTweet();
