@@ -30,27 +30,33 @@ let randomNegMoodIndex = Math.floor(Math.random() * negMood.length);
 let randomNegMood = negMood[randomNegMoodIndex];
 
 // INPUT LOCATION VARIABLES
-let pointA = "Basel";
-let pointB = "Zurich";
+let pointA = "Zurich";
+let pointB = "Bahamas";
 
 // INPUT MESSAGE
-let message = "I am a machine.";
+let message = "This is what a cat lady looks like.";
 
 // INPUT SENDER & RECEIVER
-let sender = "@PheidippidesBot";
-let receiver = "@ZulyInspires";
+let sender = "@synthetic-nor";
+let receiver = "@elonmusk";
 
 // OPENAI INITIAL CONVO PROMPT
 const chatLog = `The following is a conversation with an AI assistant.\nThe assistant is a messenger and is called Pheidippides.\nMessenger\'s trait: ${randomTraitA} and ${randomTraitB}\nMessenger\'s mood: ${randomPosMood} and ${randomNegMood} \n`;
 
 // OPENAI QUESTIONS BASED ON STATUS
-const inputQuestion = `Write two humorous sentences that you are to deliver a message from ${pointA} to ${pointB}.`;
+const inputQuestion = `Impersonating the messenger, write about delivering a message from ${pointA} to ${pointB}. Do not use more than two sentences.`;
 const inputPrompt = `${chatLog}Human: ${inputQuestion}`;
 
-const journeyQuestion = "Write two humorous sentences about your journey status about delivering the message.";
+const journeyQuestion = "Impersonating the messenger, write about your journey status about delivering the message in a humorous way. Do not use more than two sentences.";
 const journeyPrompt = `${chatLog}Human: ${journeyQuestion}`;
 
-const outputQuestion = "Write two humorous sentences that you have delivered the message succesfully.";
+const journeyQuestionA = `Impersonating the messenger, write about your journey status about delivering the message from ${pointA} to ${pointB} in a humorous way. Do not use more than two sentences.`;
+const journeyPromptA = `${chatLog}Human: ${journeyQuestionA}`;
+
+const journeyQuestionB = `Impersonating the messenger, write about your journey status about delivering the message from ${pointA} to ${pointB} in a humorous way. Do not use more than two sentences.`;
+const journeyPromptB = `${chatLog}Human: ${journeyQuestionB}`;
+
+const outputQuestion = "Impersonating the messenger, write a humorous sentence that you have delivered the message succesfully.";
 const outputPrompt = `${chatLog}Human: ${outputQuestion}`;
 
 
@@ -81,7 +87,7 @@ async function generateTweetList(){
         temperature: 0.9
     });
     let inputAiResponse = inputResponse.data.choices[0].text;
-    let initialTweet = inputAiResponse.split(":")[1].trim();
+    let initialTweet = inputAiResponse/*.split(":")[1].trim();*/;
     responseList.push(initialTweet);
 
     // JOURNEY RESPONSE
@@ -92,8 +98,29 @@ async function generateTweetList(){
         temperature: 0.9
     })
     let journeyAiResponse = journeyResponse.data.choices[0].text;
-    let journeyTweet = journeyAiResponse.split(":")[1].trim();
+    let journeyTweet = journeyAiResponse/*.split(":")[1].trim()*/;
     responseList.push(journeyTweet);
+
+    // ANOTHER JOURNEY RESPONSE
+    let journeyResponseA = await openaiJourney.createCompletion({
+        model: "text-davinci-003",
+        prompt: journeyPromptA,
+        max_tokens: 150,
+        temperature: 0.9
+    })
+    let journeyAiResponseA = journeyResponseA.data.choices[0].text;
+    let journeyTweetA = journeyAiResponseA/*.split(":")[1].trim()*/;
+    responseList.push(journeyTweetA);
+
+    let journeyResponseB = await openaiJourney.createCompletion({
+        model: "text-davinci-003",
+        prompt: journeyPromptB,
+        max_tokens: 150,
+        temperature: 0.9
+    })
+    let journeyAiResponseB = journeyResponseB.data.choices[0].text;
+    let journeyTweetB = journeyAiResponseB/*.split(":")[1].trim()*/;
+    responseList.push(journeyTweetB);
     
     // OUTPUT RESPONSE
     let outputResponse = await openaiOutput.createCompletion({
@@ -103,7 +130,7 @@ async function generateTweetList(){
         temperature: 0.9
     })
     let outputAiResponse = outputResponse.data.choices[0].text;
-    let outputQuote = outputAiResponse.split(":")[1].trim();
+    let outputQuote = outputAiResponse/*.split(":")[1].trim()*/;
     let outputTweet = `Message from ${sender} to ${receiver}: "${message}" ` + outputQuote; 
     responseList.push(outputTweet);
 
